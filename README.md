@@ -10,7 +10,7 @@ Standalones are great to use when you want to reuse code and call it from differ
 
 Create the standalone function that you want to call
 
-<img src="html_table.png" width="400">
+<img src="Image 9-19-23.png" width="400">
 
 Inside of this if statement, let's begin adding the table styling in an HTML head tag and store this in a variable called 'x'. Notice how all of the HTML and CSS syntax are contained in quotations:
 
