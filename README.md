@@ -6,37 +6,39 @@
 Standalones are great to use when you want to reuse code and call it from different functions. Keeps code a lot cleaner.
 
 
-## Set Up
+## Set Up Standalone
 
 Create the standalone function that you want to call
 
 <img src="Image 9-19-23 at 4.50 AM.jpeg" width="600">
 
-Add the parameter
+Add the parameter and make note of the function name with underscores.
 
-<img src="Image 9-19-23 at 4.50 AM.jpeg" width="600">
+<img src="Image 9-19-23 at 5.32 AM.jpeg" width="600">
+
+Add the task code (leads below)
+```
+lead_record = zoho.crm.getRecordById("Leads",lead_id);
+reminder_date_time = zoho.currenttime.addDay(1).toTime();
+//info reminderTime;
+lead_map = Map();
+lead_map.put("Subject","Lead Follow up");
+lead_map.put("$se_module","Leads");
+lead_map.put("What_Id",input.lead_id);
+lead_map.put("Owner",lead_record.get("Owner").get("id"));
+lead_map.put("Due_Date",zoho.currenttime.toDate().addDay(2));
+lead_map.put("Remind_At",{"ALARM":"FREQ=NONE;ACTION=EMAIL;TRIGGER=DATE-TIME:" + reminder_date_time.toString("yyyy-MM-dd'T'HH:mm:ss'+05:30'")});
+lead_map.put("Status","Not Started");
+lead_map.put("Send_Notification_Email",true);
+createTask = zoho.crm.createRecord("Tasks",lead_map);
+info lead_map;
+info createTask;
+
+
+return createTask;
 
 ```
-if(input.ACCOUNT_ID != null)
-{
-	//style the table
-	x = "<head><style> td { text-align: center;  padding: 12px 15px; }th {background: #313949; color:#CAC7C3; text-align:center; padding: 7px 5px;}button{color:white; padding: 8px 7px; border-radius: 5px}.edit{background-color: #313949;}.delete{background-color:red }table{width: 100%; margin: 0 auto; box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); border-collapse: collapse; background-color: white;} tbody tr:nth-of-type(even){background-color:#f3f3f3;} tbody tr{border-bottom: 1px solid #dddddd;} tbody tr.active-row{font-weight: bold;color: #009879;}.edit a{color:white}</style></head>";
-	...
 
-```
-
-<em>Note: Inline styling can be used.</em>
-
-Append your table and table header tags to the 'x' variable. My table headers will read "Name", "Phone", and "Email". 
-
-
-```
-...
-	//start the table and add the headers
-	x = x + "<table><thead><tr><th>Name</th><th>Phone</th><th>Email</th> </tr> </thead><tbody>";
-...	
-
-```
 
 Store the list you want to use in a list variable, then iterate through the list with a for each loop, getting the pieces of information you need for each record. In this example, I want to get the first and last name, email and phone number. I have omitted the null and empty checks for brevity, but you may want to add these in case you do not have complete data coming from your CRM. Concatenate the Deluge variables with the HTML/CSS syntax, using opening and closing quotations as needed. 
 
