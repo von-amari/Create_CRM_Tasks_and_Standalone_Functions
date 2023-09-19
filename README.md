@@ -6,7 +6,7 @@
 Standalones are great to use when you want to reuse code and call it from different functions. Keeps code a lot cleaner.
 
 
-## Set Up Standalone
+## Set Up Standalone Function
 
 Create the standalone function that you want to call
 
