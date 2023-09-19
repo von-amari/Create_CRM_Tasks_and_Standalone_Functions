@@ -37,27 +37,16 @@ info createTask;
 return createTask;
 
 ```
+If you need information from the standalone function, add it to the return statement at the end. For example, send the createTask response over to the function that will call the standalone.
 
-
-Store the list you want to use in a list variable, then iterate through the list with a for each loop, getting the pieces of information you need for each record. In this example, I want to get the first and last name, email and phone number. I have omitted the null and empty checks for brevity, but you may want to add these in case you do not have complete data coming from your CRM. Concatenate the Deluge variables with the HTML/CSS syntax, using opening and closing quotations as needed. 
+Now create the function that you call the standalone from. I created a simple update to the lead record if the phone number was updated.
 
 ```
-...
-	//iterate through all contacts for a particular account record
-	getRelatedContacts = zoho.crm.getRelatedRecords("Contacts","Accounts",input.Account_ID);
-	for each contact in getRelatedContacts
-	{
-		getRecord = zoho.crm.getRecordById("Contacts",contact.get("id").toLong());
-		firstName = getRecord.get("First_Name");
-		lastName = getRecord.get("Last_Name");
-		phone = getRecord.get("Phone");
-		email = getRecordc.get("Email");
-		//
-		//adds the current iteration's contact name, phone and email to the table row. Append the 'x' variable so it's storing the contact info each time. Clicking the email will open your email client. 
-		//
-		x = x + "<tr><td>" + firstName + " " + lastName + "</td><td>" + phone + "</td><td><a href='mailto:" + email + "'>" + email + "</a></td></tr>";
-	}
-...
+update_lead_status = zoho.crm.updateRecord("Leads",lead_id,{"Lead_Status":"Contact in Future"});
+
+response_from_standalone = standalone.create_lead_task(lead_id);
+
+info response_from_standalone;
 
 ```
 
