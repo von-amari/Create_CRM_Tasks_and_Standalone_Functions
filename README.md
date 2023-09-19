@@ -39,7 +39,7 @@ return createTask;
 ```
 If you need information from the standalone function, add it to the return statement at the end. For example, send the createTask response over to the function that will call the standalone.
 
-Now create the function that you call the standalone from. I created a simple update to the lead record if the phone number was updated. Call the standalone by using the "standalone.function_name(standalone_pameter)" syntax. If you just want to call it, you don't need to store it in a variable, although storing it in a variable can provide feedback if something goes wrong in the standalone.
+Now create another function where you will call the standalone from. I created a simple update to the lead record if the phone number was updated. Call the standalone by using the "standalone.function_name(standalone_pameter)" syntax. If you just want to call it, you don't need to store it in a variable, although storing it in a variable can provide feedback if something goes wrong in the standalone.
 
 ```
 update_lead_status = zoho.crm.updateRecord("Leads",lead_id,{"Lead_Status":"Contact in Future"});
@@ -53,11 +53,5 @@ info response_from_standalone;
 
 
 ```
-...
-//close the table tags
-x = x + "</tbody></table>";
-//set the blank note to equal x
-input.YOUR_NOTE_VARIABLE= x;
-}
-//end of if statement Account_ID == null
+
 ```
